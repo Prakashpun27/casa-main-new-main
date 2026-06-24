@@ -1,10 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout, Section, Eyebrow } from "@/components/SiteLayout";
-import hero from "@/assets/hero.jpg";
 import p1 from "@/assets/project-1.jpg";
 import p2 from "@/assets/project-2.jpg";
 import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
+import heroVideo from "@/assets/hero-banner.mp4"; 
+
+// 1. SABSE PEHLE: Har service ke liye background image import karein
+// (Aap apne assets folder ke hisab se sahi naam/path likh lena)
+import s1Bg from "@/assets/project-4.jpg"; // Architecture ke liye
+import s2Bg from "@/assets/project-1.jpg"; // Luxury Residential ke liye
+import s3Bg from "@/assets/project-2.jpg"; // Hospitality ke liye
+import s4Bg from "@/assets/project-3.jpg"; // Luxury Retail ke liye
+import s5Bg from "@/assets/project-1.jpg"; // Developer Solutions ke liye
+import s6Bg from "@/assets/project-2.jpg"; // Turnkey Execution ke liye
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,13 +37,14 @@ const trust = [
   "Turnkey Execution",
 ];
 
+// 2. DOOSRA KAAM: Array mein har service ke sath uski image link ('img') jodein
 const services = [
-  { n: "01", t: "Architecture", d: "Spatial planning, natural light and materiality composed for long-term usability — for villas, residences, hospitality and boutique commercial spaces." },
-  { n: "02", t: "Luxury Residential Interiors", d: "Penthouses, villas and high-end apartments crafted around personal rituals, with timeless detailing and personalized material narratives." },
-  { n: "03", t: "Hospitality Design", d: "Boutique hotels, restaurants, cafés and lounges designed to create emotional memory and elevate the guest experience." },
-  { n: "04", t: "Luxury Retail", d: "Brand-immersive retail environments that increase engagement, dwell time and the perception of premium quality." },
-  { n: "05", t: "Developer Solutions", d: "Sample apartments, sales galleries, clubhouses and amenity zones engineered to accelerate buyer conviction." },
-  { n: "06", t: "Turnkey Execution", d: "Civil, technical coordination, custom furniture, procurement, lighting and finishing — all managed under one accountable system." },
+  { n: "01", t: "Architecture", d: "Spatial planning, natural light and materiality composed for long-term usability — for villas, residences, hospitality and boutique commercial spaces.", img: s1Bg },
+  { n: "02", t: "Luxury Residential Interiors", d: "Penthouses, villas and high-end apartments crafted around personal rituals, with timeless detailing and personalized material narratives.", img: s2Bg },
+  { n: "03", t: "Hospitality Design", d: "Boutique hotels, restaurants, cafés and lounges designed to create emotional memory and elevate the guest experience.", img: s3Bg },
+  { n: "04", t: "Luxury Retail", d: "Brand-immersive retail environments that increase engagement, dwell time and the perception of premium quality.", img: s4Bg },
+  { n: "05", t: "Developer Solutions", d: "Sample apartments, sales galleries, clubhouses and amenity zones engineered to accelerate buyer conviction.", img: s5Bg },
+  { n: "06", t: "Turnkey Execution", d: "Civil, technical coordination, custom furniture, procurement, lighting and finishing — all managed under one accountable system.", img: s6Bg },
 ];
 
 const process = [
@@ -85,19 +95,20 @@ function Index() {
           </div>
         </div>
 
-        <figure className="mt-16 lg:mt-24 relative overflow-hidden">
-          <img
-            src={hero}
-            alt="Luxury minimalist living room with travertine walls and warm light"
-            width={1600}
-            height={1100}
-            className="w-full h-[60vh] lg:h-[78vh] object-cover"
+        <div className="mt-16 lg:mt-24 relative overflow-hidden w-full aspect-[4/3] md:aspect-[16/9] bg-black">
+          <video
+            src={heroVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover absolute top-0 left-0 z-10"
           />
-          <figcaption className="absolute bottom-6 left-6 right-6 flex justify-between text-bone text-xs uppercase tracking-[0.28em] text-background mix-blend-difference">
+          <div className="absolute bottom-6 left-6 right-6 flex justify-between text-bone text-xs uppercase tracking-[0.28em] text-background mix-blend-difference z-20">
             <span>Residence 07 · Golf Course Road</span>
             <span>Gurgaon, IN</span>
-          </figcaption>
-        </figure>
+          </div>
+        </div>
       </Section>
 
       {/* Trust strip */}
@@ -149,15 +160,29 @@ function Index() {
             All services
           </Link>
         </div>
+
+        {/* 3. TEESRA KAAM: Card ke layout ko background image aur overlay ke sath update kiya */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border/60">
           {services.map((s) => (
-            <article key={s.n} className="border-r border-b border-border/60 p-8 lg:p-10 group hover:bg-card transition-colors">
-              <div className="flex items-baseline justify-between">
-                <span className="font-display text-3xl text-accent">{s.n}</span>
-                <span className="text-xs uppercase tracking-[0.28em] text-muted-foreground">Service</span>
+            <article 
+              key={s.n} 
+              className="border-r border-b border-border/60 p-8 lg:p-10 group relative overflow-hidden bg-cover bg-center transition-all duration-500"
+              style={{ backgroundImage: `url(${s.img})` }}
+            >
+              {/* Overlay: Ye blackish layer text ko visible rakhegi aur hover karne par image ko aur saaf dikhayegi */}
+              <div className="absolute inset-0 bg-background/90 md:bg-background/85 group-hover:bg-background/65 transition-colors duration-300 z-0" />
+              
+              {/* Content Box (z-10 taaki text photo ke upar rahe) */}
+              <div className="relative z-10">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display text-3xl text-accent">{s.n}</span>
+                  <span className="text-xs uppercase tracking-[0.28em] text-muted-foreground/80">Service</span>
+                </div>
+                <h3 className="mt-6 font-display text-2xl text-foreground">{s.t}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                  {s.d}
+                </p>
               </div>
-              <h3 className="mt-6 font-display text-2xl">{s.t}</h3>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
             </article>
           ))}
         </div>
