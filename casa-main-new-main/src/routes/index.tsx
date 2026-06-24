@@ -6,25 +6,20 @@ import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
 import heroVideo from "@/assets/hero-banner.mp4"; 
 
-// 1. SABSE PEHLE: Har service ke liye background image import karein
-// (Aap apne assets folder ke hisab se sahi naam/path likh lena)
-import s1Bg from "@/assets/project-4.jpg"; // Architecture ke liye
-import s2Bg from "@/assets/project-1.jpg"; // Luxury Residential ke liye
-import s3Bg from "@/assets/project-2.jpg"; // Hospitality ke liye
-import s4Bg from "@/assets/project-3.jpg"; // Luxury Retail ke liye
-import s5Bg from "@/assets/project-1.jpg"; // Developer Solutions ke liye
-import s6Bg from "@/assets/project-2.jpg"; // Turnkey Execution ke liye
+// Har service ke liye background image imports
+import s1Bg from "@/assets/project-4.jpg"; 
+import s2Bg from "@/assets/project-1.jpg"; 
+import s3Bg from "@/assets/project-2.jpg"; 
+import s4Bg from "@/assets/project-3.jpg"; 
+import s5Bg from "@/assets/project-1.jpg"; 
+import s6Bg from "@/assets/project-2.jpg"; 
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Casa Exotique | Luxury Interior Designers & Turnkey Design Build, Gurgaon" },
       { name: "description", content: "Casa Exotique is a Gurgaon-based luxury architecture and design-build studio creating bespoke residences, hospitality environments, premium retail, and developer-led experiences across India." },
-      { property: "og:title", content: "Casa Exotique | Luxury Architecture & Interiors" },
-      { property: "og:description", content: "We design what luxury feels like — bespoke residences, hospitality, retail and turnkey execution." },
-      { property: "og:url", content: "/" },
     ],
-    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
@@ -37,7 +32,6 @@ const trust = [
   "Turnkey Execution",
 ];
 
-// 2. DOOSRA KAAM: Array mein har service ke sath uski image link ('img') jodein
 const services = [
   { n: "01", t: "Architecture", d: "Spatial planning, natural light and materiality composed for long-term usability — for villas, residences, hospitality and boutique commercial spaces.", img: s1Bg },
   { n: "02", t: "Luxury Residential Interiors", d: "Penthouses, villas and high-end apartments crafted around personal rituals, with timeless detailing and personalized material narratives.", img: s2Bg },
@@ -59,8 +53,61 @@ const process = [
 function Index() {
   return (
     <SiteLayout>
-      {/* Hero */}
-      <Section className="pt-10 lg:pt-16">
+      {/* Dynamic Header Overrides for Transparent Home Hero Section */}
+      <style dangerouslySetInnerHTML={{__html: `
+        header {
+          background: transparent !important;
+          background-color: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          z-index: 100 !important;
+          box-shadow: none !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+
+        header a, header span, header button, nav a, nav span {
+          color: #ffffff !important;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        main {
+          padding-top: 0 !important;
+          max-width: 100% !important;
+          width: 100% !important;
+        }
+
+        .premium-text-glow {
+          text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9) !important;
+        }
+      `}} />
+
+      {/* Hero Video Section */}
+      <div className="absolute left-0 right-0 w-screen h-[85vh] lg:h-screen bg-black overflow-hidden z-0">
+        <video
+          src={heroVideo}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        />
+        
+        {/* Lower Canvas Labels */}
+        <div className="absolute bottom-6 left-10 right-10 flex justify-between text-xs uppercase tracking-[0.28em] text-white z-20 font-medium">
+          <span>Residence 07 · Golf Course Road</span>
+          <span>Gurgaon, IN</span>
+        </div>
+      </div>
+
+      {/* Invisible Grid Spacer */}
+      <div className="h-[85vh] lg:h-screen w-full invisible pointer-events-none" />
+
+      {/* Main Content Title (Heading) */}
+      <Section className="mt-20 lg:mt-28">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <div className="lg:col-span-7">
             <Eyebrow>Luxury Architecture · Interiors · Hospitality</Eyebrow>
@@ -94,21 +141,6 @@ function Index() {
             </div>
           </div>
         </div>
-
-        <div className="mt-16 lg:mt-24 relative overflow-hidden w-full aspect-[4/3] md:aspect-[16/9] bg-black">
-          <video
-            src={heroVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover absolute top-0 left-0 z-10"
-          />
-          <div className="absolute bottom-6 left-6 right-6 flex justify-between text-bone text-xs uppercase tracking-[0.28em] text-background mix-blend-difference z-20">
-            <span>Residence 07 · Golf Course Road</span>
-            <span>Gurgaon, IN</span>
-          </div>
-        </div>
       </Section>
 
       {/* Trust strip */}
@@ -122,7 +154,7 @@ function Index() {
         </div>
       </Section>
 
-      {/* Positioning */}
+      {/* Philosophy */}
       <Section className="mt-32 grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-5">
           <Eyebrow>Philosophy</Eyebrow>
@@ -161,7 +193,6 @@ function Index() {
           </Link>
         </div>
 
-        {/* 3. TEESRA KAAM: Card ke layout ko background image aur overlay ke sath update kiya */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border/60">
           {services.map((s) => (
             <article 
@@ -169,10 +200,8 @@ function Index() {
               className="border-r border-b border-border/60 p-8 lg:p-10 group relative overflow-hidden bg-cover bg-center transition-all duration-500"
               style={{ backgroundImage: `url(${s.img})` }}
             >
-              {/* Overlay: Ye blackish layer text ko visible rakhegi aur hover karne par image ko aur saaf dikhayegi */}
               <div className="absolute inset-0 bg-background/90 md:bg-background/85 group-hover:bg-background/65 transition-colors duration-300 z-0" />
               
-              {/* Content Box (z-10 taaki text photo ke upar rahe) */}
               <div className="relative z-10">
                 <div className="flex items-baseline justify-between">
                   <span className="font-display text-3xl text-accent">{s.n}</span>

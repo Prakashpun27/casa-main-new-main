@@ -24,83 +24,153 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <header className="sticky top-0 z-40 backdrop-blur bg-background/80 border-b border-border/60">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-12 h-20 flex items-center justify-between">
+        <div className="mx-auto max-w-[1400px] px-6 lg:px-12 h-20 flex items-center justify-between relative">
           <Link to="/" className="flex items-center gap-3">
             <img
               src="/src/assets/casa-logo-icon.png"
               alt="Casa Exotique"
               className="h-10 w-auto"
             />
-            <span className="font-display text-xl tracking-wide text-foreground">Casa Exotique</span>
+            {/* Hidden on mobile, shown on desktop only to avoid overlaps */}
+            <span className="hidden lg:inline font-display text-xl tracking-wide text-foreground">
+              Casa Exotique
+            </span>
           </Link>
+          
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-9">
             {NAV.map((n) => {
-    // Agar menu item ke paas submenu hai (jaise Founder)
-    if ("submenu" in n && n.submenu) {
-      return (
-        <div key={n.label} className="relative group">
-          {/* Main Button jo dikhega */}
-          <button className="text-[0.78rem] uppercase tracking-[0.2em] text-foreground hover:text-accent flex items-center gap-1 py-2">
-            {n.label}
-          </button>
-          
-          {/* Hover karne par khulne wala Dropdown */}
-          <div className="absolute left-0 top-full尊 hidden group-hover:block min-w-[160px] bg-background border border-border/40 shadow-xl p-2 rounded-sm z-50">
-            {n.submenu.map((sub) => (
-              <Link
-                key={sub.to}
-                to={sub.to}
-                className="block px-4 py-2 text-[0.75rem] uppercase tracking-[0.1em] text-foreground hover:text-accent hover:bg-muted/50 rounded-sm transition-colors"
-              >
-                {sub.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      );
-    }
+              if ("submenu" in n && n.submenu) {
+                return (
+                  <div key={n.label} className="relative group/founder-link py-2">
+                    <Link 
+                      to={n.to}
+                      className="text-[0.78rem] uppercase tracking-[0.2em] text-white group-hover/founder-link:text-accent flex items-center gap-2"
+                      activeProps={{ className: "text-accent" }}
+                    >
+                      {n.label}
+                      <svg 
+                        width="10" 
+                        height="6" 
+                        viewBox="0 0 10 6" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="transition-transform duration-300 group-hover/founder-link:-rotate-180"
+                      >
+                        <path 
+                          d="M1 1L5 5L9 1" 
+                          stroke="#ffffff" 
+                          className="group-hover/founder-link:stroke-[var(--accent,currentColor)]"
+                          strokeWidth="2" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </Link>
+                    
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover/founder-link:flex flex-col min-w-[160px] bg-transparent backdrop-blur-none border-t border-white/20 pt-3 mt-1 z-50">
+                      {n.submenu.map((sub) => (
+                        <Link
+                          key={sub.to}
+                          to={sub.to}
+                          className="block px-4 py-2 text-center text-[0.75rem] uppercase tracking-[0.15em] text-white hover:text-accent hover:bg-white/10 transition-colors premium-text-glow"
+                          activeProps={{ className: "text-accent" }}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
 
-    // Normal Links ke liye (jaise Home, Studio, etc.)
-    return (
-      <Link
-        key={n.to}
-        to={n.to}
-        className="text-[0.78rem] uppercase tracking-[0.2em]"
-        activeProps={{ className: "text-accent" }}
-      >
-        {n.label}
-      </Link>
-    );
-  })}
+              return (
+                <Link
+                  key={n.to}
+                  to={n.to}
+                  className="text-[0.78rem] uppercase tracking-[0.2em] relative"
+                  activeProps={{ className: "text-accent" }}
+                >
+                  {n.label}
+                </Link>
+              );
+            })}
           </nav>
+          
           <Link
             to="/contact"
             className="hidden lg:inline-flex items-center text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent text-foreground hover:text-accent pb-0.5"
           >
             Begin Your Project
           </Link>
+
+          {/* Mobile Menu Burger Trigger Button */}
           <button
             aria-label="Menu"
-            className="lg:hidden text-foreground"
+            className="lg:hidden text-white z-[60] relative p-2"
             onClick={() => setOpen((v) => !v)}
           >
-            <span className="block w-7 h-px bg-current mb-1.5" />
-            <span className="block w-7 h-px bg-current mb-1.5" />
-            <span className="block w-5 h-px bg-current ml-auto" />
+            {open ? (
+              <span className="block relative w-6 h-6">
+                <span className="block absolute top-3 left-0 w-6 h-0.5 bg-white rotate-45 transition-transform" />
+                <span className="block absolute top-3 left-0 w-6 h-0.5 bg-white -rotate-45 transition-transform" />
+              </span>
+            ) : (
+              <>
+                <span className="block w-7 h-px bg-current mb-1.5" />
+                <span className="block w-7 h-px bg-current mb-1.5" />
+                <span className="block w-5 h-px bg-current ml-auto" />
+              </>
+            )}
           </button>
         </div>
+
+        {/* Fixed Mobile Overlay Layout */}
         {open && (
-          <div className="lg:hidden border-t border-border/60 px-6 py-6 flex flex-col gap-4 bg-background">
-            {NAV.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                onClick={() => setOpen(false)}
-                className="text-sm uppercase tracking-[0.22em] text-foreground/80"
-              >
-                {n.label}
-              </Link>
-            ))}
+          <div className="lg:hidden fixed inset-0 top-0 left-0 w-full h-screen bg-black/30 backdrop-blur-xl z-50 px-8 pt-28 pb-10 flex flex-col items-end overflow-y-auto">
+            <nav className="flex flex-col items-end gap-6 text-right w-full max-w-xs">
+              {NAV.map((n) => {
+                if ("submenu" in n && n.submenu) {
+                  return (
+                    <div key={n.label} className="w-full flex flex-col items-end gap-3">
+                      <Link
+                        to={n.to}
+                        onClick={() => setOpen(false)}
+                        className="text-lg font-medium uppercase tracking-[0.24em] text-white hover:text-accent transition-colors premium-text-glow"
+                        activeProps={{ className: "text-accent" }}
+                      >
+                        {n.label}
+                      </Link>
+                      <div className="flex flex-col items-end gap-2 pr-2 border-r border-white/20 mr-1 py-1">
+                        {n.submenu.map((sub) => (
+                          <Link
+                            key={sub.to}
+                            to={sub.to}
+                            onClick={() => setOpen(false)}
+                            className="text-xs uppercase tracking-[0.18em] text-white/70 hover:text-accent transition-colors"
+                            activeProps={{ className: "text-accent font-bold" }}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={n.to}
+                    to={n.to}
+                    onClick={() => setOpen(false)}
+                    className="text-lg font-medium uppercase tracking-[0.24em] text-white hover:text-accent transition-colors premium-text-glow"
+                    activeProps={{ className: "text-accent" }}
+                  >
+                    {n.label}
+                  </Link>
+                );
+              })}
+            </nav>
           </div>
         )}
       </header>
@@ -145,7 +215,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         </div>
         <div className="border-t border-border/60">
           <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
-            <p>© {new Date().getFullYear()} Casa Exotique. All rights reserved.</p>
+            <p>©️ {new Date().getFullYear()} Casa Exotique. All rights reserved.</p>
             <p className="eyebrow text-[0.62rem]">Designed in Gurgaon</p>
           </div>
         </div>
