@@ -183,7 +183,7 @@ function Index() {
       <Section className="mt-32">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
           <div>
-            <Eyebrow>Practice</Eyebrow>
+            <Eye-brow>Practice</Eye-brow>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl">
               Luxury architecture & interior services
             </h2>
@@ -295,25 +295,44 @@ function Index() {
         </div>
       </Section>
 
-      {/* Process */}
-      <Section className="mt-32">
-        <div className="max-w-2xl">
-          <Eyebrow>Method</Eyebrow>
-          <h2 className="mt-6 font-display text-4xl lg:text-5xl">Design & execution, in six considered movements</h2>
+      {/* --- Method/Process Section with Premium Full-Width Background Image --- */}
+      <section className="relative overflow-hidden bg-black text-white py-24 px-6 lg:px-16 mt-32 rounded-xl">
+        {/* 1. Background Image using pre-imported asset p4 (Villa Selene) */}
+        <div 
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.22] mix-blend-luminosity scale-105 pointer-events-none"
+          style={{ backgroundImage: `url(${p4})` }}
+        />
+        
+        {/* 2. Premium Linear Mask Layer for seamless reading comfort */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black via-black/85 to-transparent z-0 pointer-events-none" />
+
+        {/* Content Box */}
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="max-w-2xl">
+            <span className="text-[0.68rem] uppercase tracking-[0.3em] text-accent font-medium block mb-4">— Method</span>
+            <h2 className="font-display text-4xl lg:text-5xl tracking-tight text-white leading-tight">
+              Design & execution, in <br className="hidden sm:inline" />six considered movements
+            </h2>
+          </div>
+          
+          <ol className="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+            {process.map((p) => (
+              <li key={p.n} className="group border-t border-neutral-800/60 pt-6 space-y-4 hover:border-accent transition-colors duration-300">
+                <div className="flex items-baseline justify-between">
+                  <span className="font-display text-3xl text-accent transition-transform duration-300 group-hover:translate-x-1 inline-block">
+                    {p.n}
+                  </span>
+                  <span className="text-[0.6rem] uppercase tracking-[0.25em] text-neutral-500 font-medium">Movement</span>
+                </div>
+                <h3 className="font-display text-2xl text-neutral-100 font-light">{p.t}</h3>
+                <p className="text-sm leading-relaxed text-neutral-400 font-light group-hover:text-neutral-200 transition-colors duration-300">
+                  {p.d}
+                </p>
+              </li>
+            ))}
+          </ol>
         </div>
-        <ol className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-14">
-          {process.map((p) => (
-            <li key={p.n}>
-              <div className="flex items-baseline gap-4">
-                <span className="font-display text-4xl text-accent">{p.n}</span>
-                <span className="h-px flex-1 bg-border" />
-              </div>
-              <h3 className="mt-5 font-display text-2xl">{p.t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.d}</p>
-            </li>
-          ))}
-        </ol>
-      </Section>
+      </section>
 
       {/* CTA */}
       <Section className="mt-32 mb-10">

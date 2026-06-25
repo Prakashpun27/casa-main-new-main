@@ -12,9 +12,16 @@ const NAV = [
     submenu: [
       { to: "/founder/news", label: "News"},
       { to: "/founder/awards", label: "Awards"}
-    ]},
+    ]
+  },
   { to: "/services", label: "Services" },
-  { to: "/projects", label: "Projects" },
+  { 
+    to: "/projects", 
+    label: "Projects",
+    submenu: [
+      { to: "/portfolio", label: "Portfolio" } // Yahan aapka Portfolio add ho gaya
+    ]
+  },
   { to: "/faq", label: "FAQ" },
   { to: "/contact", label: "Contact" },
 ] as const;
@@ -42,10 +49,10 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             {NAV.map((n) => {
               if ("submenu" in n && n.submenu) {
                 return (
-                  <div key={n.label} className="relative group/founder-link py-2">
+                  <div key={n.label} className="relative group/link py-2">
                     <Link 
                       to={n.to}
-                      className="text-[0.78rem] uppercase tracking-[0.2em] text-white group-hover/founder-link:text-accent flex items-center gap-2"
+                      className="text-[0.78rem] uppercase tracking-[0.2em] text-white group-hover/link:text-accent flex items-center gap-2"
                       activeProps={{ className: "text-accent" }}
                     >
                       {n.label}
@@ -55,12 +62,12 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                         viewBox="0 0 10 6" 
                         fill="none" 
                         xmlns="http://www.w3.org/2000/svg"
-                        className="transition-transform duration-300 group-hover/founder-link:-rotate-180"
+                        className="transition-transform duration-300 group-hover/link:-rotate-180"
                       >
                         <path 
                           d="M1 1L5 5L9 1" 
                           stroke="#ffffff" 
-                          className="group-hover/founder-link:stroke-[var(--accent,currentColor)]"
+                          className="group-hover/link:stroke-[var(--accent,currentColor)]"
                           strokeWidth="2" 
                           strokeLinecap="round" 
                           strokeLinejoin="round"
@@ -68,7 +75,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                       </svg>
                     </Link>
                     
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover/founder-link:flex flex-col min-w-[160px] bg-transparent backdrop-blur-none border-t border-white/20 pt-3 mt-1 z-50">
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover/link:flex flex-col min-w-[160px] bg-black/90 backdrop-blur border border-white/10 p-2 mt-1 z-50 rounded shadow-xl">
                       {n.submenu.map((sub) => (
                         <Link
                           key={sub.to}
@@ -88,7 +95,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 <Link
                   key={n.to}
                   to={n.to}
-                  className="text-[0.78rem] uppercase tracking-[0.2em] relative"
+                  className="text-[0.78rem] uppercase tracking-[0.2em] relative text-white hover:text-accent"
                   activeProps={{ className: "text-accent" }}
                 >
                   {n.label}

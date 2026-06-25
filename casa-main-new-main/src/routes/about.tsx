@@ -19,6 +19,20 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <SiteLayout>
+      {/* 1. HERO VIDEO BANNER - Completely Safe Render */}
+      <div className="relative w-full h-[50vh] lg:h-[70vh] overflow-hidden bg-black">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="w-full h-full object-cover opacity-80"
+        >
+          <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-interior-design-of-a-living-room-41618-large.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/40 pointer-events-none" />
+      </div>
+
       <PageHero
         eyebrow="The Studio"
         title="A practice built on vision and execution."
@@ -66,16 +80,32 @@ function AboutPage() {
         </div>
       </Section>
 
+      {/* 2. WHAT WE PRACTICE - Fallback Pure CSS Hover & Mobile Active Background Effect */}
       <Section className="mt-32">
-        <div className="grid lg:grid-cols-12 gap-12">
-          <div className="lg:col-span-5">
+        <div className="relative grid lg:grid-cols-12 gap-12 p-8 lg:p-12 overflow-hidden group transition-all duration-500 rounded-xl bg-black/10 dark:bg-white/[0.02]">
+          
+          {/* Dynamic Background: Mobile par halka sa visible rahega aur hover/active karne par perfect fade in karega */}
+          <div 
+            className="absolute inset-0 z-0 pointer-events-none transition-all duration-700 bg-cover bg-center opacity-25 lg:opacity-0 group-hover:opacity-40 group-active:opacity-40 scale-100 group-hover:scale-105"
+            style={{ 
+              backgroundImage: `url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80')` 
+            }}
+          />
+          
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-transparent z-0 pointer-events-none" />
+
+          {/* Left Column */}
+          <div className="relative z-10 lg:col-span-5">
             <Eyebrow>What We Practice</Eyebrow>
             <h2 className="mt-6 font-display text-4xl">Disciplines under one roof.</h2>
           </div>
-          <ul className="lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-5 text-base">
+
+          {/* Right Column List */}
+          <ul className="relative z-10 lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-5 text-base">
             {["Architecture","Luxury Interiors","Turnkey Execution","Custom Furniture","Fit-outs","Developer Solutions","Hospitality Environments","Material & Lighting Curation"].map((i) => (
-              <li key={i} className="border-b border-border/60 pb-4 flex justify-between">
-                <span>{i}</span><span className="text-accent">—</span>
+              <li key={i} className="border-b border-border/60 pb-4 flex justify-between items-center transition-colors duration-300 hover:border-accent">
+                <span>{i}</span>
+                <span className="text-accent">—</span>
               </li>
             ))}
           </ul>
