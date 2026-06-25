@@ -17,6 +17,8 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FounderNewsRouteImport } from './routes/founder.news'
+import { Route as FounderAwardsRouteImport } from './routes/founder.awards'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -58,26 +60,40 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FounderNewsRoute = FounderNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => FounderRoute,
+} as any)
+const FounderAwardsRoute = FounderAwardsRouteImport.update({
+  id: '/awards',
+  path: '/awards',
+  getParentRoute: () => FounderRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/founder': typeof FounderRoute
+  '/founder': typeof FounderRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/founder/awards': typeof FounderAwardsRoute
+  '/founder/news': typeof FounderNewsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/founder': typeof FounderRoute
+  '/founder': typeof FounderRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/founder/awards': typeof FounderAwardsRoute
+  '/founder/news': typeof FounderNewsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -85,10 +101,12 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/founder': typeof FounderRoute
+  '/founder': typeof FounderRouteWithChildren
   '/projects': typeof ProjectsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/founder/awards': typeof FounderAwardsRoute
+  '/founder/news': typeof FounderNewsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +119,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/founder/awards'
+    | '/founder/news'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +131,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/founder/awards'
+    | '/founder/news'
   id:
     | '__root__'
     | '/'
@@ -121,6 +143,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/services'
     | '/sitemap.xml'
+    | '/founder/awards'
+    | '/founder/news'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -128,7 +152,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  FounderRoute: typeof FounderRoute
+  FounderRoute: typeof FounderRouteWithChildren
   ProjectsRoute: typeof ProjectsRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -192,15 +216,42 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/founder/news': {
+      id: '/founder/news'
+      path: '/news'
+      fullPath: '/founder/news'
+      preLoaderRoute: typeof FounderNewsRouteImport
+      parentRoute: typeof FounderRoute
+    }
+    '/founder/awards': {
+      id: '/founder/awards'
+      path: '/awards'
+      fullPath: '/founder/awards'
+      preLoaderRoute: typeof FounderAwardsRouteImport
+      parentRoute: typeof FounderRoute
+    }
   }
 }
+
+interface FounderRouteChildren {
+  FounderAwardsRoute: typeof FounderAwardsRoute
+  FounderNewsRoute: typeof FounderNewsRoute
+}
+
+const FounderRouteChildren: FounderRouteChildren = {
+  FounderAwardsRoute: FounderAwardsRoute,
+  FounderNewsRoute: FounderNewsRoute,
+}
+
+const FounderRouteWithChildren =
+  FounderRoute._addFileChildren(FounderRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  FounderRoute: FounderRoute,
+  FounderRoute: FounderRouteWithChildren,
   ProjectsRoute: ProjectsRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
