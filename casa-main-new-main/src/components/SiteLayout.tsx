@@ -27,11 +27,11 @@ const NAV = [
 export function SiteLayout({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
-    /* FIXED: Explicitly forced bg-black here to fill all mobile gaps and margins */
-    <div className="min-h-screen flex flex-col bg-black text-white selection:bg-accent/30">
+    /* FIXED: Enforced max-w-full and overflow-x-hidden to lock horizontal scroll/wobble completely */
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden flex flex-col bg-black text-white selection:bg-accent/30 relative">
       
-      {/* HEADER: Adjusted borders to match deep dark tone */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-black/80 border-b border-neutral-900">
+      {/* HEADER: Adjusted borders and text visibility to remain crystal clear over transparent or custom sections */}
+      <header className="sticky top-0 z-40 backdrop-blur bg-black/90 border-b border-neutral-800 text-white w-full max-w-full">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12 h-20 flex items-center justify-between relative">
           <Link to="/" className="flex items-center gap-3">
             <img
@@ -52,7 +52,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                   <div key={n.label} className="relative group/link py-2">
                     <Link 
                       to={n.to}
-                      className="text-[0.78rem] uppercase tracking-[0.2em] text-neutral-300 group-hover/link:text-accent flex items-center gap-2 transition-colors"
+                      className="text-[0.78rem] uppercase tracking-[0.2em] text-white hover:text-accent flex items-center gap-2 transition-colors"
                       activeProps={{ className: "text-accent" }}
                     >
                       {n.label}
@@ -62,7 +62,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                         viewBox="0 0 10 6" 
                         fill="none" 
                         xmlns="http://www.w3.org/2000/svg"
-                        className="transition-transform duration-300 group-hover/link:-rotate-180"
+                        className="transition-transform duration-300 group-hover/link:-rotate-180 text-white"
                       >
                         <path 
                           d="M1 1L5 5L9 1" 
@@ -74,17 +74,20 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                       </svg>
                     </Link>
                     
-                    <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover/link:flex flex-col min-w-[160px] bg-neutral-950/95 backdrop-blur border border-neutral-800 p-2 mt-1 z-50 rounded shadow-xl">
-                      {n.submenu.map((sub) => (
-                        <Link
-                          key={sub.to}
-                          to={sub.to}
-                          className="block px-4 py-2 text-center text-[0.75rem] uppercase tracking-[0.15em] text-neutral-300 hover:text-accent hover:bg-white/5 transition-colors"
-                          activeProps={{ className: "text-accent" }}
-                        >
-                          {sub.label}
-                        </Link>
-                      ))}
+                    {/* Submenu styling fix */}
+                    <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover/link:flex flex-col min-w-[140px] pt-4 z-50">
+                      <div className="flex flex-col gap-1 bg-neutral-950/95 border border-neutral-800 p-2 rounded shadow-xl">
+                        {n.submenu.map((sub) => (
+                          <Link
+                            key={sub.to}
+                            to={sub.to}
+                            className="block text-center text-[0.75rem] uppercase tracking-[0.15em] text-neutral-200 hover:text-accent py-2 transition-colors"
+                            activeProps={{ className: "text-accent" }}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 );
@@ -94,7 +97,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 <Link
                   key={n.to}
                   to={n.to}
-                  className="text-[0.78rem] uppercase tracking-[0.2em] relative text-neutral-300 hover:text-white transition-colors"
+                  className="text-[0.78rem] uppercase tracking-[0.2em] relative text-white hover:text-accent font-medium transition-colors"
                   activeProps={{ className: "text-accent" }}
                 >
                   {n.label}
@@ -123,9 +126,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               </span>
             ) : (
               <>
-                <span className="block w-7 h-px bg-current mb-1.5" />
-                <span className="block w-7 h-px bg-current mb-1.5" />
-                <span className="block w-5 h-px bg-current ml-auto" />
+                <span className="block w-7 h-px bg-white mb-1.5" />
+                <span className="block w-7 h-px bg-white mb-1.5" />
+                <span className="block w-5 h-px bg-white ml-auto" />
               </>
             )}
           </button>
@@ -153,7 +156,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                             key={sub.to}
                             to={sub.to}
                             onClick={() => setOpen(false)}
-                            className="text-xs uppercase tracking-[0.18em] text-neutral-400 hover:text-accent transition-colors"
+                            className="text-xs uppercase tracking-[0.18em] text-neutral-200 hover:text-accent transition-colors"
                             activeProps={{ className: "text-accent font-bold" }}
                           >
                             {sub.label}
@@ -181,11 +184,11 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      {/* MAIN CONTAINER: Enforced bg-black for seamless section transit */}
-      <main className="flex-1 bg-black">{children}</main>
+      {/* MAIN CONTAINER: Locked with max-w-full and overflow-x-hidden to isolate banner elements */}
+      <main className="flex-1 w-full max-w-full overflow-x-hidden bg-black relative">{children}</main>
 
       {/* FOOTER AREA */}
-      <footer className="border-t border-neutral-900 bg-black text-white">
+      <footer className="border-t border-neutral-900 bg-black text-white w-full max-w-full">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12 py-20 grid gap-14 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 group">
@@ -249,7 +252,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`mx-auto max-w-[1400px] px-6 lg:px-12 ${className}`}>
+    <section className={`mx-auto w-full max-w-[1400px] px-6 lg:px-12 ${className}`}>
       {children}
     </section>
   );
@@ -274,7 +277,7 @@ export function PageHero({
   intro?: string;
 }) {
   return (
-    <Section className="pt-24 pb-16 lg:pt-36 lg:pb-24 grid lg:grid-cols-12 gap-12 items-end bg-black">
+    <Section className="pt-24 pb-16 lg:pt-36 lg:pb-24 grid lg:grid-cols-12 gap-12 items-end bg-black relative z-10">
       <div className="lg:col-span-7">
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1 className="mt-6 font-display text-5xl lg:text-7xl leading-[1.02] text-white">{title}</h1>

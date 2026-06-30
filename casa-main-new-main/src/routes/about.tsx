@@ -1,6 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteLayout, Section, PageHero, Eyebrow } from "@/components/SiteLayout";
+import { SiteLayout, Section, PageHero } from "@/components/SiteLayout";
 import img from "@/assets/project-5.jpg";
+
+// 1. Apni naye banner photo ko assets se import karein
+import aboutBanner from "@/assets/about-banner.jpg"; 
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -19,19 +22,47 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <SiteLayout>
-      {/* 1. HERO VIDEO BANNER - Completely Safe Render */}
-      <div className="relative w-full h-[50vh] lg:h-[70vh] overflow-hidden bg-black">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="w-full h-full object-cover opacity-80"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-interior-design-of-a-living-room-41618-large.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/40 pointer-events-none" />
+      {/* Dynamic Header Overrides taaki banner top screen tak poora cover kare */}
+      <style dangerouslySetInnerHTML={{__html: `
+        header {
+          background: transparent !important;
+          background-color: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          z-index: 100 !important;
+          box-shadow: none !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+
+        header a, header span, header button, nav a, nav span {
+          color: #ffffff !important;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        main {
+          padding-top: 0 !important;
+          max-width: 100% !important;
+          width: 100% !important;
+        }
+      `}} />
+
+      {/* 2. HERO IMAGE BANNER - Now completely full screen width & merged to top */}
+      <div className="absolute left-0 right-0 w-screen h-[50vh] lg:h-[65vh] overflow-hidden bg-black z-0">
+        <img 
+          src={aboutBanner} 
+          alt="Studio Banner" 
+          className="w-full h-full object-cover opacity-75"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/50 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
       </div>
+
+      {/* Spacer taaki content image ke upar collapse na ho */}
+      <div className="h-[50vh] lg:h-[65vh] w-full invisible pointer-events-none" />
 
       <PageHero
         eyebrow="The Studio"
@@ -80,11 +111,11 @@ function AboutPage() {
         </div>
       </Section>
 
-      {/* 2. WHAT WE PRACTICE - Fallback Pure CSS Hover & Mobile Active Background Effect */}
+      {/* WHAT WE PRACTICE - FIXED TEXT COLOR TO BLACK */}
       <Section className="mt-32">
         <div className="relative grid lg:grid-cols-12 gap-12 p-8 lg:p-12 overflow-hidden group transition-all duration-500 rounded-xl bg-black/10 dark:bg-white/[0.02]">
           
-          {/* Dynamic Background: Mobile par halka sa visible rahega aur hover/active karne par perfect fade in karega */}
+          {/* Dynamic Background */}
           <div 
             className="absolute inset-0 z-0 pointer-events-none transition-all duration-700 bg-cover bg-center opacity-25 lg:opacity-0 group-hover:opacity-40 group-active:opacity-40 scale-100 group-hover:scale-105"
             style={{ 
@@ -94,16 +125,16 @@ function AboutPage() {
           
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-transparent z-0 pointer-events-none" />
 
-          {/* Left Column */}
-          <div className="relative z-10 lg:col-span-5">
-            <Eyebrow>What We Practice</Eyebrow>
-            <h2 className="mt-6 font-display text-4xl">Disciplines under one roof.</h2>
+          {/* Left Column - Eyebrow & Title explicitly Black */}
+          <div className="relative z-10 lg:col-span-5 text-black">
+            <span className="text-[0.68rem] uppercase tracking-[0.3em] text-black font-semibold block mb-4">— What We Practice</span>
+            <h2 className="mt-6 font-display text-4xl text-black">Disciplines under one roof.</h2>
           </div>
 
-          {/* Right Column List */}
-          <ul className="relative z-10 lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-5 text-base">
+          {/* Right Column List - Items & Borders adjusted to Black */}
+          <ul className="relative z-10 lg:col-span-7 grid sm:grid-cols-2 gap-x-10 gap-y-5 text-base text-black font-medium">
             {["Architecture","Luxury Interiors","Turnkey Execution","Custom Furniture","Fit-outs","Developer Solutions","Hospitality Environments","Material & Lighting Curation"].map((i) => (
-              <li key={i} className="border-b border-border/60 pb-4 flex justify-between items-center transition-colors duration-300 hover:border-accent">
+              <li key={i} className="border-b border-black/20 pb-4 flex justify-between items-center transition-colors duration-300 hover:border-accent">
                 <span>{i}</span>
                 <span className="text-accent">—</span>
               </li>

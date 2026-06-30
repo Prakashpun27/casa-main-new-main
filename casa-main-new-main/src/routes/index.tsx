@@ -111,30 +111,30 @@ function Index() {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <div className="lg:col-span-7">
             <Eyebrow>Luxury Architecture · Interiors · Hospitality</Eyebrow>
-            <h1 className="mt-6 font-display text-[2.75rem] sm:text-6xl lg:text-[5.5rem] leading-[0.98] tracking-tight">
+            <h1 className="mt-6 font-display text-[2.75rem] sm:text-6xl lg:text-[5.5rem] leading-[0.98] tracking-tight text-white">
               We Design <span className="italic text-accent">What Luxury</span> Feels Like.
             </h1>
           </div>
           <div className="lg:col-span-5 space-y-8">
-            <p className="text-lg leading-relaxed text-muted-foreground">
+            <p className="text-lg leading-relaxed text-neutral-400">
               Casa Exotique is a Gurgaon-based luxury architecture and design-build studio
               creating bespoke residences, hospitality environments, premium retail spaces,
               and developer-led experiences across India.
             </p>
-            <p className="text-base leading-relaxed text-muted-foreground">
+            <p className="text-base leading-relaxed text-neutral-400">
               From concept to turnkey execution — designed with architectural clarity,
               emotional intelligence, and precision-led delivery.
             </p>
             <div className="flex flex-wrap gap-4 pt-2">
               <Link
                 to="/contact"
-                className="inline-flex items-center px-7 py-4 bg-primary text-primary-foreground text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent transition-colors"
+                className="inline-flex items-center px-7 py-4 bg-white text-black font-medium text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent hover:text-white transition-colors"
               >
                 Begin Your Project
               </Link>
               <Link
                 to="/projects"
-                className="inline-flex items-center px-7 py-4 border border-foreground/30 text-[0.72rem] uppercase tracking-[0.28em] hover:border-accent hover:text-accent transition-colors"
+                className="inline-flex items-center px-7 py-4 border border-white/30 text-white text-[0.72rem] uppercase tracking-[0.28em] hover:border-accent hover:text-accent transition-colors"
               >
                 Explore Our Work
               </Link>
@@ -143,11 +143,11 @@ function Index() {
         </div>
       </Section>
 
-      {/* Trust strip */}
+      {/* Trust strip - FIXED Text Visibility */}
       <Section className="mt-20">
-        <div className="border-y border-border/70 py-8 grid grid-cols-2 md:grid-cols-5 gap-y-4 gap-x-6 text-center">
+        <div className="border-y border-neutral-800 py-8 grid grid-cols-2 md:grid-cols-5 gap-y-4 gap-x-6 text-center">
           {trust.map((t) => (
-            <span key={t} className="text-[0.72rem] uppercase tracking-[0.22em] text-foreground/70">
+            <span key={t} className="text-[0.72rem] uppercase tracking-[0.22em] text-white font-medium">
               {t}
             </span>
           ))}
@@ -158,11 +158,11 @@ function Index() {
       <Section className="mt-32 grid lg:grid-cols-12 gap-12">
         <div className="lg:col-span-5">
           <Eyebrow>Philosophy</Eyebrow>
-          <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight">
+          <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight text-white">
             Built for clients who expect more than <em className="text-accent not-italic">beautiful spaces</em>.
           </h2>
         </div>
-        <div className="lg:col-span-7 space-y-6 text-lg leading-relaxed text-muted-foreground">
+        <div className="lg:col-span-7 space-y-6 text-lg leading-relaxed text-neutral-400">
           <p>
             At Casa Exotique, we believe luxury is not defined by excess. It is defined by
             precision. By proportion. By atmosphere. By how a space makes people feel long
@@ -173,7 +173,7 @@ function Index() {
             execution, custom manufacturing, and turnkey project management under one
             integrated ecosystem.
           </p>
-          <p className="text-foreground">
+          <p className="text-white">
             No chaos. No compromise. No diluted vision.
           </p>
         </div>
@@ -183,32 +183,32 @@ function Index() {
       <Section className="mt-32">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
           <div>
-            <Eye-brow>Practice</Eye-brow>
-            <h2 className="mt-6 font-display text-4xl lg:text-5xl">
+            <Eyebrow>Practice</Eyebrow>
+            <h2 className="mt-6 font-display text-4xl lg:text-5xl text-white">
               Luxury architecture & interior services
             </h2>
           </div>
-          <Link to="/services" className="text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent pb-0.5 hover:text-accent">
+          <Link to="/services" className="text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent pb-0.5 text-white hover:text-accent">
             All services
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-border/60">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 border-t border-l border-neutral-800">
           {services.map((s) => (
             <article 
               key={s.n} 
-              className="border-r border-b border-border/60 p-8 lg:p-10 group relative overflow-hidden bg-cover bg-center transition-all duration-500"
+              className="border-r border-b border-neutral-800 p-8 lg:p-10 group relative overflow-hidden bg-cover bg-center transition-all duration-500"
               style={{ backgroundImage: `url(${s.img})` }}
             >
-              <div className="absolute inset-0 bg-background/90 md:bg-background/85 group-hover:bg-background/65 transition-colors duration-300 z-0" />
+              <div className="absolute inset-0 bg-black/90 md:bg-black/85 group-hover:bg-black/65 transition-colors duration-300 z-0" />
               
               <div className="relative z-10">
                 <div className="flex items-baseline justify-between">
                   <span className="font-display text-3xl text-accent">{s.n}</span>
-                  <span className="text-xs uppercase tracking-[0.28em] text-muted-foreground/80">Service</span>
+                  <span className="text-xs uppercase tracking-[0.28em] text-neutral-500">Service</span>
                 </div>
-                <h3 className="mt-6 font-display text-2xl text-foreground">{s.t}</h3>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                <h3 className="mt-6 font-display text-2xl text-white">{s.t}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-neutral-400 group-hover:text-white transition-colors duration-300">
                   {s.d}
                 </p>
               </div>
@@ -222,9 +222,9 @@ function Index() {
         <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
           <div>
             <Eyebrow>Selected Work</Eyebrow>
-            <h2 className="mt-6 font-display text-4xl lg:text-5xl">A practice of refined environments</h2>
+            <h2 className="mt-6 font-display text-4xl lg:text-5xl text-white">A practice of refined environments</h2>
           </div>
-          <Link to="/projects" className="text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent pb-0.5 hover:text-accent">
+          <Link to="/projects" className="text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent pb-0.5 text-white hover:text-accent">
             View all projects
           </Link>
         </div>
@@ -233,7 +233,7 @@ function Index() {
             <div className="overflow-hidden">
               <img src={p1} alt="Marble dining room" loading="lazy" width={1100} height={1400} className="w-full h-[60vh] object-cover group-hover:scale-[1.03] transition-transform duration-700" />
             </div>
-            <figcaption className="mt-5 flex justify-between text-sm">
+            <figcaption className="mt-5 flex justify-between text-sm text-white">
               <span className="font-display text-xl">Penthouse Aria</span>
               <span className="eyebrow">Residence · Gurgaon</span>
             </figcaption>
@@ -242,7 +242,7 @@ function Index() {
             <div className="overflow-hidden">
               <img src={p2} alt="Boutique hotel lobby" loading="lazy" width={1400} height={1000} className="w-full h-[60vh] object-cover group-hover:scale-[1.03] transition-transform duration-700" />
             </div>
-            <figcaption className="mt-5 flex justify-between text-sm">
+            <figcaption className="mt-5 flex justify-between text-sm text-white">
               <span className="font-display text-xl">Maison No. 12</span>
               <span className="eyebrow">Hospitality · Delhi</span>
             </figcaption>
@@ -251,7 +251,7 @@ function Index() {
             <div className="overflow-hidden">
               <img src={p3} alt="Luxury retail boutique" loading="lazy" width={1100} height={1400} className="w-full h-[55vh] object-cover group-hover:scale-[1.03] transition-transform duration-700" />
             </div>
-            <figcaption className="mt-5 flex justify-between text-sm">
+            <figcaption className="mt-5 flex justify-between text-sm text-white">
               <span className="font-display text-xl">Atelier Travertine</span>
               <span className="eyebrow">Retail · Mumbai</span>
             </figcaption>
@@ -260,7 +260,7 @@ function Index() {
             <div className="overflow-hidden">
               <img src={p4} alt="Luxury villa exterior" loading="lazy" width={1400} height={1000} className="w-full h-[55vh] object-cover group-hover:scale-[1.03] transition-transform duration-700" />
             </div>
-            <figcaption className="mt-5 flex justify-between text-sm">
+            <figcaption className="mt-5 flex justify-between text-sm text-white">
               <span className="font-display text-xl">Villa Selene</span>
               <span className="eyebrow">Architecture · NCR</span>
             </figcaption>
@@ -270,25 +270,25 @@ function Index() {
 
       {/* Developer positioning */}
       <Section className="mt-32">
-        <div className="bg-primary text-primary-foreground p-10 lg:p-20 grid lg:grid-cols-12 gap-10">
+        <div className="bg-neutral-900 text-white p-10 lg:p-20 grid lg:grid-cols-12 gap-10 border border-neutral-800">
           <div className="lg:col-span-5">
-            <p className="eyebrow text-bone/70">For Developers</p>
+            <p className="eyebrow text-accent">For Developers</p>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight">
               Today's buyers do not purchase square footage. They purchase <em className="text-accent not-italic">aspiration</em>.
             </h2>
           </div>
-          <div className="lg:col-span-7 space-y-5 text-bone/80 leading-relaxed">
+          <div className="lg:col-span-7 space-y-5 text-neutral-400 leading-relaxed">
             <p>
               Casa Exotique helps developers create high-conversion environments through
               strategically designed sample apartments, experience centers, clubhouses,
               arrival sequences, sales galleries and branded amenity zones.
             </p>
-            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 pt-4 text-sm">
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 pt-4 text-sm text-neutral-300">
               {["Sample apartments","Experience centers","Clubhouses","Premium arrival experiences","Sales galleries","Branded amenity zones"].map((i) => (
                 <li key={i} className="flex gap-3"><span className="text-accent">—</span>{i}</li>
               ))}
             </ul>
-            <Link to="/services" className="inline-flex mt-4 items-center text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent pb-0.5">
+            <Link to="/services" className="inline-flex mt-4 items-center text-[0.72rem] uppercase tracking-[0.28em] border-b border-accent pb-0.5 text-white">
               Developer Solutions
             </Link>
           </div>
@@ -296,14 +296,14 @@ function Index() {
       </Section>
 
       {/* --- Method/Process Section with Premium Full-Width Background Image --- */}
-      <section className="relative overflow-hidden bg-black text-white py-24 px-6 lg:px-16 mt-32 rounded-xl">
-        {/* 1. Background Image using pre-imported asset p4 (Villa Selene) */}
+      <section className="relative overflow-hidden bg-black text-white py-24 px-6 lg:px-16 mt-32 rounded-xl border border-neutral-900">
+        {/* Background Image using pre-imported asset p4 (Villa Selene) */}
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.22] mix-blend-luminosity scale-105 pointer-events-none"
           style={{ backgroundImage: `url(${p4})` }}
         />
         
-        {/* 2. Premium Linear Mask Layer for seamless reading comfort */}
+        {/* Premium Linear Mask Layer for seamless reading comfort */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/85 to-transparent z-0 pointer-events-none" />
 
         {/* Content Box */}
@@ -336,15 +336,15 @@ function Index() {
 
       {/* CTA */}
       <Section className="mt-32 mb-10">
-        <div className="border-t border-border/60 pt-20 grid lg:grid-cols-12 gap-10 items-end">
+        <div className="border-t border-neutral-800 pt-20 grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-8">
             <Eyebrow>Begin</Eyebrow>
-            <h2 className="mt-6 font-display text-4xl lg:text-6xl leading-tight">
+            <h2 className="mt-6 font-display text-4xl lg:text-6xl leading-tight text-white">
               A residence. A hotel. A flagship. Let's design what comes next.
             </h2>
           </div>
           <div className="lg:col-span-4 flex lg:justify-end">
-            <Link to="/contact" className="inline-flex items-center px-8 py-5 bg-primary text-primary-foreground text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent transition-colors">
+            <Link to="/contact" className="inline-flex items-center px-8 py-5 bg-white text-black font-semibold text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent hover:text-white transition-colors">
               Schedule a Design Consultation
             </Link>
           </div>

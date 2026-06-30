@@ -7,6 +7,9 @@ import p4 from "@/assets/project-4.jpg";
 import p5 from "@/assets/project-5.jpg";
 import p6 from "@/assets/project-6.jpg";
 
+// 1. Apni local projects banner image ko yahan import kiya
+import projectsBanner from "@/assets/projects-banner.jpg"; 
+
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
@@ -34,6 +37,48 @@ const projects = [
 function ProjectsPage() {
   return (
     <SiteLayout>
+      {/* Dynamic Header Overrides taaki banner top screen tak poora cover kare */}
+      <style dangerouslySetInnerHTML={{__html: `
+        header {
+          background: transparent !important;
+          background-color: transparent !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          z-index: 100 !important;
+          box-shadow: none !important;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+        }
+
+        header a, header span, header button, nav a, nav span {
+          color: #ffffff !important;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        main {
+          padding-top: 0 !important;
+          max-width: 100% !important;
+          width: 100% !important;
+        }
+      `}} />
+
+      {/* 2. PROJECTS HERO IMAGE BANNER - Merged completely to the top screen */}
+      <div className="absolute left-0 right-0 w-screen h-[50vh] lg:h-[65vh] overflow-hidden bg-black z-0">
+        <img 
+          src={projectsBanner} 
+          alt="Projects Banner" 
+          className="w-full h-full object-cover opacity-75"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-black/50 pointer-events-none" />
+        <div className="absolute inset-0 bg-black/20 pointer-events-none" />
+      </div>
+
+      {/* Spacer taaki text context banner ke thik niche se start ho */}
+      <div className="h-[50vh] lg:h-[65vh] w-full invisible pointer-events-none" />
+
       <PageHero
         eyebrow="Selected Projects"
         title="A curated collection of refined environments."
