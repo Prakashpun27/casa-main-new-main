@@ -24,14 +24,25 @@ const NAV = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-export function SiteLayout({ children }: { children: ReactNode }) {
+export function SiteLayout({ 
+  children, 
+  transparentHeader = false 
+}: { 
+  children: ReactNode;
+  transparentHeader?: boolean;
+}) {
   const [open, setOpen] = useState(false);
   return (
-    /* FIXED: Enforced max-w-full and overflow-x-hidden to lock horizontal scroll/wobble completely */
     <div className="min-h-screen w-full max-w-full overflow-x-hidden flex flex-col bg-black text-white selection:bg-accent/30 relative">
       
-      {/* HEADER: Adjusted borders and text visibility to remain crystal clear over transparent or custom sections */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-black/90 border-b border-neutral-800 text-white w-full max-w-full">
+      {/* HEADER: Jab transparentHeader true hoga toh negative margin handles overlay container natively */}
+      <header 
+        className={`sticky top-0 z-40 text-white w-full max-w-full transition-all duration-300 ${
+          transparentHeader 
+            ? "bg-transparent border-b border-transparent mb-[-80px]" 
+            : "backdrop-blur bg-black/90 border-b border-neutral-800"
+        }`}
+      >
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12 h-20 flex items-center justify-between relative">
           <Link to="/" className="flex items-center gap-3">
             <img
@@ -74,7 +85,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                       </svg>
                     </Link>
                     
-                    {/* Submenu styling fix */}
+                    {/* Submenu styling */}
                     <div className="absolute left-1/2 -translate-x-1/2 top-full hidden group-hover/link:flex flex-col min-w-[140px] pt-4 z-50">
                       <div className="flex flex-col gap-1 bg-neutral-950/95 border border-neutral-800 p-2 rounded shadow-xl">
                         {n.submenu.map((sub) => (
@@ -184,7 +195,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         )}
       </header>
 
-      {/* MAIN CONTAINER: Locked with max-w-full and overflow-x-hidden to isolate banner elements */}
+      {/* MAIN CONTAINER */}
       <main className="flex-1 w-full max-w-full overflow-x-hidden bg-black relative">{children}</main>
 
       {/* FOOTER AREA */}
@@ -244,6 +255,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   );
 }
 
+{/* MISSING EXPORTS ADDED BACK HERE - FIXES CRASH */}
 export function Section({
   children,
   className = "",
@@ -260,8 +272,7 @@ export function Section({
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="eyebrow">
-      <span className="rule border-neutral-800" />
+    <p className="eyebrow flex items-center gap-3">
       {children}
     </p>
   );

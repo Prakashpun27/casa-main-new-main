@@ -143,7 +143,7 @@ function Index() {
         </div>
       </Section>
 
-      {/* Trust strip - FIXED Text Visibility */}
+      {/* Trust strip */}
       <Section className="mt-20">
         <div className="border-y border-neutral-800 py-8 grid grid-cols-2 md:grid-cols-5 gap-y-4 gap-x-6 text-center">
           {trust.map((t) => (
@@ -217,7 +217,7 @@ function Index() {
         </div>
       </Section>
 
-      {/* Featured projects */}
+      {/* Featured projects - FIXED DUPLICATE IMAGE HERE */}
       <Section className="mt-32">
         <div className="flex items-end justify-between flex-wrap gap-6 mb-14">
           <div>
@@ -272,7 +272,7 @@ function Index() {
       <Section className="mt-32">
         <div className="bg-neutral-900 text-white p-10 lg:p-20 grid lg:grid-cols-12 gap-10 border border-neutral-800">
           <div className="lg:col-span-5">
-            <p className="eyebrow text-accent">For Developers</p>
+            <p className="eyebrow text-accent">for developers</p>
             <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight">
               Today's buyers do not purchase square footage. They purchase <em className="text-accent not-italic">aspiration</em>.
             </h2>
@@ -295,18 +295,51 @@ function Index() {
         </div>
       </Section>
 
-      {/* --- Method/Process Section with Premium Full-Width Background Image --- */}
+      {/* Differentiator Section */}
+      <Section className="mt-32">
+        <div className="border-t border-neutral-900 pt-16 grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5">
+            <Eyebrow>Differentiator</Eyebrow>
+            <h2 className="mt-6 font-display text-4xl lg:text-5xl leading-tight text-white">
+              Why Casa Exotique <br />Is <em className="text-accent not-italic font-normal">Different</em>
+            </h2>
+            <p className="mt-6 text-sm text-neutral-500 font-light max-w-sm leading-relaxed">
+              We do not believe luxury should feel loud. True luxury feels effortless because every detail has already been considered.
+            </p>
+          </div>
+
+          <div className="lg:col-span-7 space-y-8">
+            <p className="text-lg text-neutral-400 font-light leading-relaxed">
+              Most firms focus only on visual design. Casa Exotique approaches projects through an integrated lens of technical mastery and emotional value.
+            </p>
+            
+            <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4 border-l border-neutral-800/80 pl-6 lg:pl-10 py-2">
+              {[
+                "architecture",
+                "emotional storytelling",
+                "execution intelligence",
+                "hospitality thinking",
+                "material depth",
+                "spatial psychology"
+              ].map((item) => (
+                <li key={item} className="group flex items-center gap-4 text-neutral-400 hover:text-white transition-colors duration-300 text-sm tracking-wide">
+                  <span className="w-1.5 h-1.5 bg-accent/60 rounded-full group-hover:bg-accent group-hover:scale-125 transition-all duration-300" />
+                  <span className="lowercase font-light tracking-[0.05em]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      {/* --- Method/Process Section --- */}
       <section className="relative overflow-hidden bg-black text-white py-24 px-6 lg:px-16 mt-32 rounded-xl border border-neutral-900">
-        {/* Background Image using pre-imported asset p4 (Villa Selene) */}
         <div 
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-[0.22] mix-blend-luminosity scale-105 pointer-events-none"
           style={{ backgroundImage: `url(${p4})` }}
         />
-        
-        {/* Premium Linear Mask Layer for seamless reading comfort */}
         <div className="absolute inset-0 bg-gradient-to-br from-black via-black/85 to-transparent z-0 pointer-events-none" />
 
-        {/* Content Box */}
         <div className="relative z-10 max-w-7xl mx-auto">
           <div className="max-w-2xl">
             <span className="text-[0.68rem] uppercase tracking-[0.3em] text-accent font-medium block mb-4">— Method</span>

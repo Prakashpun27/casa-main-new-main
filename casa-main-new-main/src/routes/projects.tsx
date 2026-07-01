@@ -82,7 +82,8 @@ function ProjectsPage() {
       <PageHero
         eyebrow="Selected Projects"
         title="A curated collection of refined environments."
-        intro="Luxury residences, hospitality concepts, retail spaces and developer-led experiences — each project reflects our commitment to material depth, spatial clarity and refined execution."
+        intro="Luxury residences, hospitality concepts, retail spaces and developer-led experiences 
+        each project reflects our commitment to material depth, spatial clarity and refined execution."
       />
 
       <Section>

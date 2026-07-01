@@ -60,7 +60,12 @@ function FounderPage() {
               </h1>
               <div className="space-y-6 text-base lg:text-lg leading-relaxed text-neutral-400 font-light">
                 <p>For Bhawana Bhatnagar, design is not simply about aesthetics...</p>
-                <p>Under her leadership, Casa Exotique has developed into a luxury design-build studio...</p>
+                <p>Under her leadership, Casa Exotique has developed into a luxury design-build studio recognized highly personalized environments that balance 
+                  architectural sophistication with execution excellence.
+                </p>
+                <p>Rather than following trends, Bhawana focuses on creating environments with emotional performance
+                  spaces that continue to feel relevant, calm, and deeply human over time.
+                </p>
               </div>
               <div className="pt-4">
                 <Link to="/contact" className="inline-flex items-center justify-center px-8 py-5 bg-white text-black font-medium text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent hover:text-white transition-all duration-300 active:scale-95 shadow-xl">
