@@ -2,16 +2,15 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout, Section, Eyebrow } from "@/components/SiteLayout";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import p1 from "@/assets/Intro.jpg"; 
-import philosophyImg from "@/assets/philosophy.jpg"; // Philosophy section ke liye nayi photo
+import philosophyImg from "@/assets/philosophy.jpg"; 
 import p2 from "@/assets/project-2.jpg";
 import p3 from "@/assets/project-3.jpg";
 import p4 from "@/assets/project-4.jpg";
 import heroVideo from "@/assets/hero-banner.mp4"; 
 
-// Left side narrative image import
 import devShowcase from "@/assets/developer-showcase.jpg"; 
 
-// Service section backgrounds
+// Service aur Method section dono ke liye background images
 import s1Bg from "@/assets/project-4.jpg"; 
 import s2Bg from "@/assets/project-1.jpg"; 
 import s3Bg from "@/assets/project-2.jpg"; 
@@ -29,7 +28,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-// --- REVERSIBLE TWO-WAY SCROLL REVEAL COMPONENT ---
 function ScrollReveal({ 
   children, 
   variant = "fade-up", 
@@ -97,13 +95,14 @@ const services = [
   { n: "06", t: "Turnkey Execution", d: "Civil, technical coordination, custom furniture, procurement, lighting and finishing — all managed under one accountable system.", img: s6Bg },
 ];
 
+// Method process array jisme har item ke sath uski respective image map ki hai
 const process = [
-  { n: "01", t: "Discovery", d: "Understanding the client's vision, lifestyle, business goals and spatial requirements." },
-  { n: "02", t: "Spatial Strategy", d: "Architectural planning, circulation, zoning and experiential mapping developed with precision." },
-  { n: "03", t: "Design Development", d: "Material palettes, lighting, furniture language and detailing refined into a cohesive environment." },
-  { n: "04", t: "Technical Resolution", d: "Execution drawings, services coordination, procurement planning and structured timelines." },
-  { n: "05", t: "Turnkey Execution", d: "Site delivery, vendor coordination, custom manufacturing, fit-outs and finishing." },
-  { n: "06", t: "Final Styling & Reveal", d: "Every final layer curated so the space feels complete, balanced and emotionally resonant." },
+  { n: "01", t: "Discovery", d: "Understanding the client's vision, lifestyle, business goals and spatial requirements.", img: s1Bg },
+  { n: "02", t: "Spatial Strategy", d: "Architectural planning, circulation, zoning and experiential mapping developed with precision.", img: s2Bg },
+  { n: "03", t: "Design Development", d: "Material palettes, lighting, furniture language and detailing refined into a cohesive environment.", img: s3Bg },
+  { n: "04", t: "Technical Resolution", d: "Execution drawings, services coordination, procurement planning and structured timelines.", img: s4Bg },
+  { n: "05", t: "Turnkey Execution", d: "Site delivery, vendor coordination, custom manufacturing, fit-outs and finishing.", img: s5Bg },
+  { n: "06", t: "Final Styling & Reveal", d: "Every final layer curated so the space feels complete, balanced and emotionally resonant.", img: s6Bg },
 ];
 
 function Index() {
@@ -156,11 +155,9 @@ function Index() {
       {/* MAIN INTEGRATED LAYOUT FLOW CONTAINER */}
       <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-500 relative z-20">
 
-        {/* --- SECTION 2: INTRO & BRAND CONTEXT (FIRST) --- */}
+        {/* --- SECTION 2: INTRO & BRAND CONTEXT --- */}
         <Section className="py-24 lg:py-32 border-b border-neutral-100 dark:border-neutral-900">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* LEFT SIDE: INTRO PHOTO WITH SCALE-UP ANIMATION */}
             <div className="lg:col-span-6">
               <ScrollReveal variant="scale-up">
                 <div className="overflow-hidden rounded shadow-2xl aspect-[4/5] bg-neutral-100 dark:bg-neutral-900">
@@ -173,7 +170,6 @@ function Index() {
               </ScrollReveal>
             </div>
             
-            {/* RIGHT SIDE: MAIN INTRO TEXT & CTA BUTTONS */}
             <div className="lg:col-span-6 space-y-6 lg:pl-6">
               <ScrollReveal variant="fade-left">
                 <p className="text-lg leading-relaxed text-neutral-600 dark:text-neutral-400 font-light">
@@ -190,7 +186,6 @@ function Index() {
                 </p>
               </ScrollReveal>
 
-              {/* CALL TO ACTION BUTTONS */}
               <ScrollReveal variant="fade-left" delay={250}>
                 <div className="flex flex-wrap gap-4 pt-4">
                   <Link
@@ -208,29 +203,13 @@ function Index() {
                 </div>
               </ScrollReveal>
             </div>
-
           </div>
         </Section>
 
-        {/* --- SECTION 3: PHILOSOPHY CONTENT BLOCK (NEW EXCLUSIVE SECTION WITH PHOTO) --- */}
+        {/* --- SECTION 3: PHILOSOPHY CONTENT BLOCK --- */}
         <Section className="py-24 lg:py-32 border-b border-neutral-100 dark:border-neutral-900 bg-neutral-50/50 dark:bg-neutral-950/20">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            
-            {/* LEFT SIDE: PHILOSOPHY PHOTO WITH SCALE-UP ANIMATION */}
-            <div className="lg:col-span-6 lg:order-1">
-              <ScrollReveal variant="scale-up">
-                <div className="overflow-hidden rounded shadow-2xl aspect-[4/5] bg-neutral-100 dark:bg-neutral-900">
-                  <img 
-                    src={philosophyImg} 
-                    alt="Casa Exotique Design Philosophy" 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.5s] ease-out" 
-                  />
-                </div>
-              </ScrollReveal>
-            </div>
-
-            {/* RIGHT SIDE: PHILOSOPHY CONTENT */}
-            <div className="lg:col-span-6 lg:order-2 space-y-6 lg:pr-6">
+            <div className="lg:col-span-6 lg:order-1 space-y-6 lg:pr-6">
               <ScrollReveal variant="fade-right">
                 <Eyebrow>Philosophy</Eyebrow>
                 <h2 className="mt-4 font-display text-3xl lg:text-4xl leading-tight text-neutral-900 dark:text-white font-light">
@@ -246,6 +225,17 @@ function Index() {
               </ScrollReveal>
             </div>
 
+            <div className="lg:col-span-6 lg:order-2">
+              <ScrollReveal variant="scale-up">
+                <div className="overflow-hidden rounded shadow-2xl aspect-[4/5] bg-neutral-100 dark:bg-neutral-900">
+                  <img 
+                    src={philosophyImg} 
+                    alt="Casa Exotique Design Philosophy" 
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-[1.5s] ease-out" 
+                  />
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </Section>
 
@@ -376,7 +366,7 @@ function Index() {
           </div>
         </Section>
 
-        {/* --- SECTION 7: TWO-WAY DIRECTIONAL REVEAL FOR DEVELOPERS --- */}
+        {/* --- SECTION 7: DEVELOPERS SHOWCASE --- */}
         <Section className="py-24 lg:py-36">
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <div className="lg:col-span-5">
@@ -423,8 +413,8 @@ function Index() {
           </div>
         </Section>
 
-        {/* --- SECTION 8: METHOD / STRATEGY FLOW --- */}
-        <Section className="py-24 lg:py-36 bg-neutral-50 dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-900 max-w-full">
+        {/* --- SECTION 8: METHOD / STRATEGY FLOW (BACKGROUND IMAGE APPLIED) --- */}
+        <Section className="py-24 lg:py-36 bg-white dark:bg-neutral-950 border-t border-neutral-200 dark:border-neutral-900 max-w-full">
           <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
             <div className="max-w-3xl mb-16 space-y-3">
               <ScrollReveal variant="fade-up">
@@ -438,23 +428,39 @@ function Index() {
             <div className="overflow-x-auto no-scrollbar snap-x snap-mandatory">
               <ol className="flex gap-8 pb-6 w-max">
                 {process.map((p, index) => (
-                  <li key={p.n} className="snap-start w-[80vw] sm:w-[40vw] lg:w-[22vw] min-w-[280px]">
+                  <li key={p.n} className="snap-start w-[85vw] sm:w-[45vw] lg:w-[24vw] min-w-[300px]">
                     <ScrollReveal variant="fade-up" delay={index * 80}>
-                      <div className="border-t pt-8 space-y-4 border-neutral-300 dark:border-neutral-800 hover:border-accent dark:hover:border-accent transition-colors duration-500 group relative">
-                        <div className="flex items-baseline justify-between">
-                          <span className="font-display text-3xl text-accent font-mono">{p.n}</span>
-                          <span className="text-[0.6rem] uppercase tracking-[0.25em] text-neutral-400 group-hover:text-accent transition-colors font-medium">
-                            {index !== process.length - 1 ? "Next →" : "Reveal"}
-                          </span>
+                      {/* Card layout with premium assets background imagery */}
+                      <div className="relative overflow-hidden rounded bg-black aspect-[3/4] group border border-white/5 shadow-xl transition-all duration-500">
+                        
+                        {/* Background Asset Image */}
+                        <div 
+                          className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:scale-105 transition-transform duration-1000 ease-out z-0"
+                          style={{ backgroundImage: `url(${p.img})` }}
+                        />
+                        
+                        {/* Dark Content Overlay for Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/40 z-10 transition-opacity duration-500 group-hover:opacity-90" />
+                        
+                        {/* Card Content Elements */}
+                        <div className="absolute inset-0 z-20 p-8 flex flex-col justify-between">
+                          <div className="flex items-baseline justify-between border-b border-white/10 pb-4">
+                            <span className="font-display text-3xl text-accent font-mono">{p.n}</span>
+                            <span className="text-[0.6rem] uppercase tracking-[0.25em] text-white/50 group-hover:text-accent transition-colors font-medium">
+                              {index !== process.length - 1 ? "Next →" : "Reveal"}
+                            </span>
+                          </div>
+
+                          <div className="space-y-3">
+                            <h3 className="font-display text-xl text-white font-light group-hover:text-accent transition-colors">
+                              {p.t}
+                            </h3>
+                            <p className="text-xs leading-relaxed font-light text-white/70 line-clamp-4 group-hover:line-clamp-none transition-all duration-500">
+                              {p.d}
+                            </p>
+                          </div>
                         </div>
 
-                        <h3 className="font-display text-xl font-light text-neutral-800 dark:text-neutral-100 group-hover:text-neutral-900 dark:group-hover:text-white">
-                          {p.t}
-                        </h3>
-                        
-                        <p className="text-xs leading-relaxed font-light text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-800 dark:group-hover:text-neutral-200">
-                          {p.d}
-                        </p>
                       </div>
                     </ScrollReveal>
                   </li>
@@ -464,9 +470,9 @@ function Index() {
           </div>
         </Section>
 
-        {/* --- SECTION 9: DIFFERENTIATOR CONTENT BLOCK --- */}
+        {/* --- SECTION 9: DIFFERENTIATOR & INTEGRATED CTA BUTTON --- */}
         <Section className="py-24 lg:py-36 border-t border-neutral-200 dark:border-neutral-900">
-          <div className="grid lg:grid-cols-12 gap-12">
+          <div className="grid lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-5 space-y-4">
               <ScrollReveal variant="fade-right">
                 <Eyebrow>Differentiator</Eyebrow>
@@ -479,48 +485,38 @@ function Index() {
               </ScrollReveal>
             </div>
 
-            <div className="lg:col-span-7 space-y-8">
-              <ScrollReveal variant="fade-left">
-                <p className="text-lg font-light leading-relaxed text-neutral-600 dark:text-neutral-400">
-                  Most firms focus only on visual design. Casa Exotique approaches projects through an integrated lens of technical mastery and emotional value.
-                </p>
-              </ScrollReveal>
-              
-              <ScrollReveal variant="fade-left" delay={150}>
-                <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4 border-l pl-6 lg:pl-10 py-2 border-neutral-200 dark:border-neutral-800">
-                  {[
-                    "architecture",
-                    "emotional storytelling",
-                    "execution intelligence",
-                    "hospitality thinking",
-                    "material depth",
-                    "spatial psychology"
-                  ].map((item) => (
-                    <li key={item} className="group flex items-center gap-4 text-sm tracking-wide text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">
-                      <span className="w-1.5 h-1.5 bg-accent/60 rounded-full group-hover:bg-accent group-hover:scale-125 transition-all duration-300" />
-                      <span className="lowercase font-light tracking-[0.05em]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </ScrollReveal>
-            </div>
-          </div>
-        </Section>
+            <div className="lg:col-span-7 space-y-10">
+              <div className="space-y-8">
+                <ScrollReveal variant="fade-left">
+                  <p className="text-lg font-light leading-relaxed text-neutral-600 dark:text-neutral-400">
+                    Most firms focus only on visual design. Casa Exotique approaches projects through an integrated lens of technical mastery and emotional value.
+                  </p>
+                </ScrollReveal>
+                
+                <ScrollReveal variant="fade-left" delay={150}>
+                  <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4 border-l pl-6 lg:pl-10 py-2 border-neutral-200 dark:border-neutral-800">
+                    {[
+                      "architecture",
+                      "emotional storytelling",
+                      "execution intelligence",
+                      "hospitality thinking",
+                      "material depth",
+                      "spatial psychology"
+                    ].map((item) => (
+                      <li key={item} className="group flex items-center gap-4 text-sm tracking-wide text-neutral-600 hover:text-black dark:text-neutral-400 dark:hover:text-white transition-colors">
+                        <span className="w-1.5 h-1.5 bg-accent/60 rounded-full group-hover:bg-accent group-hover:scale-125 transition-all duration-300" />
+                        <span className="lowercase font-light tracking-[0.05em]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </ScrollReveal>
+              </div>
 
-        {/* --- SECTION 10: CALL TO ACTION (CTA) --- */}
-        <Section className="py-24 border-t border-neutral-200 dark:border-neutral-800">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-8 space-y-4">
-              <ScrollReveal variant="fade-right">
-                <Eyebrow>Begin</Eyebrow>
-                <h2 className="font-display text-3xl lg:text-5xl leading-tight text-neutral-900 dark:text-white font-light">
-                  A residence. A hotel. A flagship. <br />Let's design what comes next.
-                </h2>
-              </ScrollReveal>
-            </div>
-            <div className="lg:col-span-4 flex lg:justify-end">
-              <ScrollReveal variant="fade-left" delay={150}>
-                <Link to="/contact" className="inline-flex items-center px-8 py-5 font-medium text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent hover:text-white transition-colors bg-black text-white dark:bg-white dark:text-black">
+              <ScrollReveal variant="fade-left" delay={250} className="pt-2">
+                <Link 
+                  to="/contact" 
+                  className="inline-flex items-center px-8 py-5 font-medium text-[0.72rem] uppercase tracking-[0.28em] hover:bg-accent hover:text-white transition-colors bg-black text-white dark:bg-white dark:text-black shadow-lg"
+                >
                   Schedule a Design Consultation
                 </Link>
               </ScrollReveal>
